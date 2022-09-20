@@ -1,5 +1,4 @@
 import React from "react";
-import { words } from "./words";
 
 export const App = () => {
     const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
@@ -10,20 +9,19 @@ export const App = () => {
         );
     };
 
-
     return (
         <main className="main">
             <div className="game">
                 <img src="assets/forca0.png" alt="imagem da forca" className="game__image" />
-                <button className="game__choose-button">Escolher Palavras</button>
+                <button className="game__button">Escolher Palavras</button>
             </div>
             <ul className="letters">
                 {alphabet.map(letter => <Letter key={letter} name={letter} />)}
             </ul>
-            <div>
-                <p>Já sei a resposta!</p>
-                <input type="text" name="chute" className="chute" />
-                <button>Chutar</button>
+            <div className="guess">
+                <p>Já sei a palavra!</p>
+                <input type="text" name="guess" className="guess__input" />
+                <button className="guess__button">Chutar</button>
             </div>
         </main>
     );
