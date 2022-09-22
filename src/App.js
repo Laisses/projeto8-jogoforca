@@ -7,13 +7,13 @@ import {words} from "./words";
 export const App = () => {
     const initialGameState = {
         word: null,
+        pressedLetters: [],
         chances: 6,
         keyboardEnabled: false,
         guessInput: false,
     };
     
-    const [gameState, setGameState] = useState(initialGameState);
-    const [pressed, setPressed] = useState([]);
+    const [state, setState] = useState(initialGameState);
 
     const randomizeWord = () => {
         const wordsList = words;
@@ -22,21 +22,20 @@ export const App = () => {
 
     const chooseWord = () => {
         const randomWord = randomizeWord();
-        setGameState({ ...gameState, word: randomWord, keyboardEnabled: true, guessInput:true });
+        setState({...state, word: randomWord, keyboardEnabled: true, guessInput:true });
     }
 
     const pressLetter = (letter) => {
-        const pressedLetters = [...pressed, letter];        
-        if (gameState.keyboardEnabled && !pressed.includes(letter)) {
-            setPressed(pressedLetters);
+        if (state.keyboardEnabled && !state.pressedLetters.includes(letter)) {
+            setState({...state, pressedLetters: [...state.pressedLetters, letter]});
         }
     };
     
     return (
         <main className="main">
-            <Game word={gameState.word} onClick={chooseWord}/>
-            <Letters enabled={gameState.keyboardEnabled} onPress={pressLetter} pressedLetters={pressed}/>
-            <Guess enabled={gameState.guessInput}/>
+            <Game word={state.word} onClick={chooseWord}/>
+            <Letters enabled={state.keyboardEnabled} onPress={pressLetter} pressedLetters={state.pressedLetters}/>
+            <Guess enabled={state.guessInput}/>
         </main>
     );
 };
