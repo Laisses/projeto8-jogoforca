@@ -2,7 +2,7 @@ const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m
 
 const Letter = props => {
     return (
-        <li className="letter inativo">{props.name}</li>
+        <li className="letter ativo">{props.name}</li>
     );
 };
 
