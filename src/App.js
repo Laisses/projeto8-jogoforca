@@ -48,15 +48,25 @@ export const App = () => {
                     .split("")
                     .map((l, index) => state.word[index] === letter ? letter : l)
                     .join("");
-    
-                setState({
-                    ...state,
-                    blankWord: partialWord,
-                    pressedLetters: [...state.pressedLetters, letter]
-                })
+
+                if (partialWord !== state.word) {
+                    setState({
+                        ...state,
+                        blankWord: partialWord,
+                        pressedLetters: [...state.pressedLetters, letter]
+                    })
+                } else {
+                    setState({
+                        ...state,
+                        blankWord: null,
+                        keyboardEnabled: false,
+                        guessInput: false,
+                        status: "green",
+                    })
+                }               
+
             } else {
                 const errorCount = state.errors + 1;
-                
                 if (errorCount < 6) {
                     setState({
                         ...state,
