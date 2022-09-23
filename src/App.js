@@ -13,7 +13,7 @@ export const App = () => {
         keyboardEnabled: false,
         guessInput: false,
     };
-    
+
     const [state, setState] = useState(initialGameState);
 
     const randomizeWord = () => {
@@ -25,15 +25,14 @@ export const App = () => {
         const randomWord = randomizeWord();
         const blankWord = randomWord
             .split("")
-            .map(l => l !== "" ? " _" : " ")
-            .join("");
-        
+            .map(l => l = " _");
+
         setState({
             ...state,
             pressedLetters: [],
             word: blankWord,
             keyboardEnabled: true,
-            guessInput:true
+            guessInput: true
         });
     }
 
@@ -45,12 +44,12 @@ export const App = () => {
             });
         }
     };
-    
+
     return (
         <main className="main">
-            <Game word={state.word} image={state.image} onClick={chooseWord}/>
-            <Letters enabled={state.keyboardEnabled} onPress={pressLetter} pressedLetters={state.pressedLetters}/>
-            <Guess enabled={state.guessInput}/>
+            <Game word={state.word} image={state.image} onClick={chooseWord} />
+            <Letters enabled={state.keyboardEnabled} onPress={pressLetter} pressedLetters={state.pressedLetters} />
+            <Guess enabled={state.guessInput} />
         </main>
     );
 };
