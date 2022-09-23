@@ -2,13 +2,14 @@ import { useState } from "react";
 import { Guess } from "./Guess";
 import { Letters } from "./Letters";
 import { Game } from "./Game";
-import { words } from "./words";
+import { words, images } from "./assets";
 
 export const App = () => {
     const initialGameState = {
         word: null,
         pressedLetters: [],
         chances: 6,
+        image: images[0],
         keyboardEnabled: false,
         guessInput: false,
     };
@@ -47,7 +48,7 @@ export const App = () => {
     
     return (
         <main className="main">
-            <Game word={state.word} onClick={chooseWord}/>
+            <Game word={state.word} image={state.image} onClick={chooseWord}/>
             <Letters enabled={state.keyboardEnabled} onPress={pressLetter} pressedLetters={state.pressedLetters}/>
             <Guess enabled={state.guessInput}/>
         </main>
