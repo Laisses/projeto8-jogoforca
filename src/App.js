@@ -7,6 +7,7 @@ import { words, images } from "./assets";
 export const App = () => {
     const initialGameState = {
         word: null,
+        blankWord: null,
         pressedLetters: [],
         chances: 6,
         image: images[0],
@@ -23,20 +24,28 @@ export const App = () => {
 
     const chooseWord = () => {
         const randomWord = randomizeWord();
-        const blankWord = randomWord
+        const dottedWord = randomWord
             .split("")
-            .map(l => l = " _");
+            .map(l => l = " _")
+            .join("");
 
         setState({
             ...state,
             pressedLetters: [],
-            word: blankWord,
+            word: randomWord,
+            blankWord: dottedWord,
             keyboardEnabled: true,
             guessInput: true
         });
     }
 
     const pressLetter = (letter) => {
+        if (state.word.includes(letter)) {
+            console.log("Existe a letra " + letter + " na plavra");
+        } else {
+            console.log(letter + " não!")
+        }
+
         if (state.keyboardEnabled && !state.pressedLetters.includes(letter)) {
             setState({
                 ...state,
@@ -47,7 +56,7 @@ export const App = () => {
 
     return (
         <main className="main">
-            <Game word={state.word} image={state.image} onClick={chooseWord} />
+            <Game word={state.word} blank= {state.blankWord}image={state.image} onClick={chooseWord} />
             <Letters enabled={state.keyboardEnabled} onPress={pressLetter} pressedLetters={state.pressedLetters} />
             <Guess enabled={state.guessInput} />
         </main>
