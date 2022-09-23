@@ -126,3 +126,11 @@
 .guess__button:active {
     background-color: #cad4db;
 }
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}

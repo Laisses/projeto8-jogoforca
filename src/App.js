@@ -9,10 +9,11 @@ export const App = () => {
         word: null,
         blankWord: null,
         pressedLetters: [],
-        chances: 6,
+        errors: 0,
         image: images[0],
         keyboardEnabled: false,
         guessInput: false,
+        status: "start",
     };
 
     const [state, setState] = useState(initialGameState);
@@ -30,18 +31,17 @@ export const App = () => {
             .join("");
 
         setState({
-            ...state,
-            pressedLetters: [],
+            ...initialGameState,
             word: randomWord,
             blankWord: dottedWord,
             keyboardEnabled: true,
-            guessInput: true
+            guessInput: true,
         });
+
+        console.log(randomWord);
     }
 
     const pressLetter = (letter) => {
-        console.log(state.word)
-
         if (state.keyboardEnabled && !state.pressedLetters.includes(letter)) {
             if (state.word.includes(letter)) {
                 const partialWord = state.blankWord
@@ -55,17 +55,34 @@ export const App = () => {
                     pressedLetters: [...state.pressedLetters, letter]
                 })
             } else {
-                setState({
-                    ...state,
-                    pressedLetters: [...state.pressedLetters, letter]
-                })
+                const errorCount = state.errors + 1;
+                
+                if (errorCount < 6) {
+                    setState({
+                        ...state,
+                        errors: errorCount,
+                        image: images[errorCount],
+                        pressedLetters: [...state.pressedLetters, letter]
+                    })
+                } else {
+                    setState({
+                        ...state,
+                        blankWord: null,                        
+                        pressedLetters: [...state.pressedLetters, letter],
+                        errors: errorCount,
+                        image: images[errorCount],
+                        keyboardEnabled: false,
+                        guessInput: false,
+                        status: "red"
+                    })
+                }
             }
         }
     };
 
     return (
         <main className="main">
-            <Game word={state.word} blank={state.blankWord} image={state.image} onClick={chooseWord} />
+            <Game word={state.word} blank={state.blankWord} image={state.image} status={state.status} onClick={chooseWord} />
             <Letters enabled={state.keyboardEnabled} onPress={pressLetter} pressedLetters={state.pressedLetters} />
             <Guess enabled={state.guessInput} />
         </main>
