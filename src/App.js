@@ -26,7 +26,7 @@ export const App = () => {
         const randomWord = randomizeWord();
         const dottedWord = randomWord
             .split("")
-            .map(l => l = " _")
+            .map(_l => "_")
             .join("");
 
         setState({
@@ -40,23 +40,32 @@ export const App = () => {
     }
 
     const pressLetter = (letter) => {
-        if (state.word.includes(letter)) {
-            console.log("Existe a letra " + letter + " na plavra");
-        } else {
-            console.log(letter + " não!")
-        }
+        console.log(state.word)
 
         if (state.keyboardEnabled && !state.pressedLetters.includes(letter)) {
-            setState({
-                ...state,
-                pressedLetters: [...state.pressedLetters, letter]
-            });
+            if (state.word.includes(letter)) {
+                const partialWord = state.blankWord
+                    .split("")
+                    .map((l, index) => state.word[index] === letter ? letter : l)
+                    .join("");
+    
+                setState({
+                    ...state,
+                    blankWord: partialWord,
+                    pressedLetters: [...state.pressedLetters, letter]
+                })
+            } else {
+                setState({
+                    ...state,
+                    pressedLetters: [...state.pressedLetters, letter]
+                })
+            }
         }
     };
 
     return (
         <main className="main">
-            <Game word={state.word} blank= {state.blankWord}image={state.image} onClick={chooseWord} />
+            <Game word={state.word} blank={state.blankWord} image={state.image} onClick={chooseWord} />
             <Letters enabled={state.keyboardEnabled} onPress={pressLetter} pressedLetters={state.pressedLetters} />
             <Guess enabled={state.guessInput} />
         </main>
