@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Guess } from "./Guess";
 import { Letters } from "./Letters";
 import { Game } from "./Game";
-import {words} from "./words";
+import { words } from "./words";
 
 export const App = () => {
     const initialGameState = {
@@ -22,12 +22,26 @@ export const App = () => {
 
     const chooseWord = () => {
         const randomWord = randomizeWord();
-        setState({...state, word: randomWord, keyboardEnabled: true, guessInput:true });
+        const blankWord = randomWord
+            .split("")
+            .map(l => l !== "" ? " _" : " ")
+            .join("");
+        
+        setState({
+            ...state,
+            pressedLetters: [],
+            word: blankWord,
+            keyboardEnabled: true,
+            guessInput:true
+        });
     }
 
     const pressLetter = (letter) => {
         if (state.keyboardEnabled && !state.pressedLetters.includes(letter)) {
-            setState({...state, pressedLetters: [...state.pressedLetters, letter]});
+            setState({
+                ...state,
+                pressedLetters: [...state.pressedLetters, letter]
+            });
         }
     };
     
