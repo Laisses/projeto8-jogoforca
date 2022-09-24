@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Guess } from "./Guess";
-import { Letters } from "./Letters";
+import styled from "styled-components";
+import { GuessInput } from "./Guess";
+import { Keyboard } from "./Letters";
 import { Game } from "./Game";
 import { words, images } from "./assets";
 
@@ -68,7 +69,7 @@ export const App = () => {
                         status: "green",
                         button: "Escolher Palavra",
                     })
-                }               
+                }
 
             } else {
                 const errorCount = state.errors + 1;
@@ -120,10 +121,16 @@ export const App = () => {
     }
 
     return (
-        <main className="main">
+        <Main>
             <Game word={state.word} blank={state.blankWord} image={state.image} status={state.status} button={state.button} onClick={chooseWord} />
-            <Letters enabled={state.keyboardEnabled} onPress={pressLetter} pressedLetters={state.pressedLetters} />
-            <Guess enabled={state.guessInput} input={(e) => setState({...state, input: e.target.value})} onClick={guessWord} value={state.input}/>
-        </main>
+            <Keyboard enabled={state.keyboardEnabled} onPress={pressLetter} pressedLetters={state.pressedLetters} />
+            <GuessInput enabled={state.guessInput} input={(e) => setState({ ...state, input: e.target.value })} onClick={guessWord} value={state.input} />
+        </Main>
     );
 };
+
+const Main = styled.main`
+    font-family: 'Roboto', sans-serif;
+    max-width: 800px;
+    margin: auto;
+`;
