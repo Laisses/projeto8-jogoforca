@@ -1,18 +1,18 @@
 import styled from "styled-components";
 
-export const GuessInput = ({enabled, input, onClick, value}) => {
+export const GuessInput = ({ enabled, input, onClick, value }) => {
     return (
         <Guess>
             <p>Já sei a palavra!</p>
-            <input 
-                type="text" 
+            <GuessText
+                type="text"
                 name="guess"
-                disabled={enabled ? false : true} 
-                onChange={input} 
-                value={value} 
+                disabled={enabled ? false : true}
+                onChange={input}
+                value={value}
                 onKeyPress={e => e.key === "Enter" && onClick()}
             />
-            <button onClick={onClick}>Chutar</button>
+            <GuessButton onClick={onClick}>Chutar</GuessButton>
         </Guess>
     );
 };
@@ -21,9 +21,10 @@ const Guess = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+`;
 
-    input {
-        margin: auto 10px;
+const GuessText = styled.input`
+    margin: auto 10px;
         width: 300px;
         height: 30px;
         border: 1px solid #b1b3b1;
@@ -31,10 +32,10 @@ const Guess = styled.div`
         &:focus {
             outline: none;
             }
-    }
+`;
 
-    button {
-        width: 80px;
+const GuessButton = styled.button`
+    width: 80px;
         height: 40px;
         font-size: 18px;
         font-weight: bold;
@@ -46,5 +47,4 @@ const Guess = styled.div`
         &:hover, &:active {
             background-color: #cad4db;
         }
-    }
 `;

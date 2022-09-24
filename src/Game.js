@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const Game = ({ word, blank, image, onClick, status, button }) => {
     return (
-        <GameStyle wordColor={status}>
-            <img src={image} alt="imagem da forca" />
-            <button onClick={onClick}>{button}</button>
-            <div>{blank === null ? word : blank}</div>
+        <GameStyle >
+            <GameImage src={image} alt="imagem da forca" />
+            <GameButton onClick={onClick}>{button}</GameButton>
+            <GameWord wordColor={status}>{blank === null ? word : blank}</GameWord>
         </GameStyle>
     );
 };
@@ -15,13 +15,14 @@ const GameStyle = styled.div`
     display: flex;
     align-items: flex-start;
     position: relative;
+`;
 
-    img {
-        width: 300px;
-    }
+const GameImage = styled.img`
+    width: 300px;
+`;
 
-    button {
-        margin-top: 20px;
+const GameButton = styled.button`
+     margin-top: 20px;
         margin-left: 200px;
         border: none;
         padding: 15px;
@@ -40,15 +41,14 @@ const GameStyle = styled.div`
             background-color: #219449;
             box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
         }
-    }
+`;
 
-    div {
-        position: absolute;
+const GameWord = styled.div`
+    position: absolute;
         bottom: 10px;
         left: 480px;
         font-weight: bold;
         font-size: 40px;
         letter-spacing: 3px;
         color: ${props => props.wordColor};
-    }
 `;
