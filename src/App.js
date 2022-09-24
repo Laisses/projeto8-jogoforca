@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { createGlobalStyle } from "styled-components";
+import { GlobalStyle } from "./GlobalStyle";
 import { GuessInput } from "./Guess";
 import { Keyboard } from "./Letters";
 import { Game } from "./Game";
@@ -163,10 +163,4 @@ const Main = styled.main`
     font-family: 'Roboto', sans-serif;
     max-width: 800px;
     margin: auto;
-`;
-
-const GlobalStyle = createGlobalStyle`
-    *{
-        box-sizing: border-box;
-    }
 `;
