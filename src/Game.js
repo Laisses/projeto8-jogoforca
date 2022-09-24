@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const Game = ({ word, blank, image, onClick, status, button }) => {
     return (
         <GameStyle >
-            <GameImage src={image} alt="imagem da forca" />
-            <GameButton onClick={onClick}>{button}</GameButton>
-            <GameWord wordColor={status}>{blank === null ? word : blank}</GameWord>
+            <GameImage data-identifier="game-image" src={image} alt="imagem da forca" />
+            <GameButton data-identifier="choose-word" onClick={onClick}>{button}</GameButton>
+            <GameWord data-identifier="word" wordColor={status}>{blank === null ? word : blank}</GameWord>
         </GameStyle>
     );
 };

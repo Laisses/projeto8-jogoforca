@@ -7,6 +7,7 @@ export const Keyboard = ({enabled, onPress, pressedLetters}) => {
             {alphabet.map(letter => {
                 const letterEnabled = enabled && !pressedLetters.includes(letter);
                 return <Letter
+                    data-identifier="letter"
                     active={letterEnabled}
                     onClick={() => onPress(letter)}
                     key={letter}>

@@ -7,12 +7,13 @@ export const GuessInput = ({ enabled, input, onClick, value }) => {
             <GuessText
                 type="text"
                 name="guess"
+                data-identifier="type-guess"
                 disabled={enabled ? false : true}
                 onChange={input}
                 value={value}
                 onKeyPress={e => e.key === "Enter" && onClick()}
             />
-            <GuessButton onClick={onClick}>Chutar</GuessButton>
+            <GuessButton data-identifier="guess-button" onClick={onClick}>Chutar</GuessButton>
         </Guess>
     );
 };
@@ -36,15 +37,15 @@ const GuessText = styled.input`
 
 const GuessButton = styled.button`
     width: 80px;
-        height: 40px;
-        font-size: 18px;
-        font-weight: bold;
-        color: #3F7EA6;
-        background-color: #E1ECF4;
-        border: 1px solid #78A4BF;
-        border-radius: 3px;
-        cursor: pointer;
-        &:hover, &:active {
-            background-color: #cad4db;
-        }
+    height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #3F7EA6;
+    background-color: #E1ECF4;
+    border: 1px solid #78A4BF;
+    border-radius: 3px;
+    cursor: pointer;
+    &:hover, &:active {
+        background-color: #cad4db;
+    }
 `;
