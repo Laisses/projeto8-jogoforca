@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import { GuessInput } from "./Guess";
 import { Keyboard } from "./Letters";
 import { Game } from "./Game";
@@ -121,11 +122,15 @@ export const App = () => {
     }
 
     return (
-        <Main>
-            <Game word={state.word} blank={state.blankWord} image={state.image} status={state.status} button={state.button} onClick={chooseWord} />
-            <Keyboard enabled={state.keyboardEnabled} onPress={pressLetter} pressedLetters={state.pressedLetters} />
-            <GuessInput enabled={state.guessInput} input={(e) => setState({ ...state, input: e.target.value })} onClick={guessWord} value={state.input} />
-        </Main>
+        <>
+            <GlobalStyle />
+            <Main>
+                <Game word={state.word} blank={state.blankWord} image={state.image} status={state.status} button={state.button} onClick={chooseWord} />
+                <Keyboard enabled={state.keyboardEnabled} onPress={pressLetter} pressedLetters={state.pressedLetters} />
+                <GuessInput enabled={state.guessInput} input={(e) => setState({ ...state, input: e.target.value })} onClick={guessWord} value={state.input} />
+            </Main>
+        </>
+        
     );
 };
 
@@ -133,4 +138,10 @@ const Main = styled.main`
     font-family: 'Roboto', sans-serif;
     max-width: 800px;
     margin: auto;
+`;
+
+const GlobalStyle = createGlobalStyle`
+    *{
+        box-sizing: border-box;
+    }
 `;
