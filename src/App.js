@@ -15,6 +15,7 @@ export const App = () => {
         guessInput: false,
         input: "",
         status: "start",
+        button: "Escolher Palavra",
     };
 
     const [state, setState] = useState(initialGameState);
@@ -38,6 +39,7 @@ export const App = () => {
             keyboardEnabled: true,
             guessInput: true,
             input: "",
+            button: "Mudar Palavra"
         });
 
         console.log(randomWord);
@@ -64,6 +66,7 @@ export const App = () => {
                         keyboardEnabled: false,
                         guessInput: false,
                         status: "green",
+                        button: "Escolher Palavra",
                     })
                 }               
 
@@ -86,6 +89,7 @@ export const App = () => {
                         keyboardEnabled: false,
                         guessInput: false,
                         status: "red",
+                        button: "Escolher Palavra",
                     })
                 }
             }
@@ -100,6 +104,7 @@ export const App = () => {
                 keyboardEnabled: false,
                 guessInput: false,
                 status: "green",
+                button: "Escolher Palavra",
             })
         } else {
             setState({
@@ -109,13 +114,14 @@ export const App = () => {
                 keyboardEnabled: false,
                 guessInput: false,
                 status: "red",
+                button: "Escolher Palavra",
             })
         }
     }
 
     return (
         <main className="main">
-            <Game word={state.word} blank={state.blankWord} image={state.image} status={state.status} onClick={chooseWord} />
+            <Game word={state.word} blank={state.blankWord} image={state.image} status={state.status} button={state.button} onClick={chooseWord} />
             <Letters enabled={state.keyboardEnabled} onPress={pressLetter} pressedLetters={state.pressedLetters} />
             <Guess enabled={state.guessInput} input={(e) => setState({...state, input: e.target.value})} onClick={guessWord} value={state.input}/>
         </main>
