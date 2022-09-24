@@ -45,14 +45,39 @@ export const App = () => {
         });
 
         console.log(randomWord);
-    }
+    };
+
+    const simplifyLetter = l => {
+        if (l === "ç") {
+            return "c";
+        } else if ("áãàâ".includes(l)) {
+            return "a";
+        } else if ("éê".includes(l)) {
+            return "e";
+        } else if ("í".includes(l)) {
+            return "i";
+        } else if ("óô".includes(l)) {
+            return "o";
+        } else if ("ú".includes(l)) {
+            return "u";
+        } else {
+            return l;
+        }
+    };
+
+    const simplifyWord = word => word.split("").map(simplifyLetter).join("");    
+       
+    const compareLetters = (lhs, rhs) => {
+        return simplifyLetter(lhs) === simplifyLetter(rhs);
+    };
 
     const pressLetter = (letter) => {
         if (state.keyboardEnabled && !state.pressedLetters.includes(letter)) {
-            if (state.word.includes(letter)) {
+            if (simplifyWord(state.word).includes(letter)) {
+                
                 const partialWord = state.blankWord
                     .split("")
-                    .map((l, index) => state.word[index] === letter ? letter : l)
+                    .map((l, index) => compareLetters(state.word[index], letter) ? state.word[index] : l)
                     .join("");
 
                 if (partialWord !== state.word) {
