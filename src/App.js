@@ -65,8 +65,8 @@ export const App = () => {
         }
     };
 
-    const simplifyWord = word => word.split("").map(simplifyLetter).join("");    
-       
+    const simplifyWord = word => word.split("").map(simplifyLetter).join("");
+
     const compareLetters = (lhs, rhs) => {
         return simplifyLetter(lhs) === simplifyLetter(rhs);
     };
@@ -74,7 +74,7 @@ export const App = () => {
     const pressLetter = (letter) => {
         if (state.keyboardEnabled && !state.pressedLetters.includes(letter)) {
             if (simplifyWord(state.word).includes(letter)) {
-                
+
                 const partialWord = state.blankWord
                     .split("")
                     .map((l, index) => compareLetters(state.word[index], letter) ? state.word[index] : l)
@@ -155,7 +155,6 @@ export const App = () => {
                 <GuessInput enabled={state.guessInput} input={(e) => setState({ ...state, input: e.target.value })} onClick={guessWord} value={state.input} />
             </Main>
         </>
-        
     );
 };
 
