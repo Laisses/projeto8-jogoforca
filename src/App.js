@@ -43,8 +43,6 @@ export const App = () => {
             input: "",
             button: "Mudar Palavra"
         });
-
-        console.log(randomWord);
     };
 
     const simplifyLetter = l => {
